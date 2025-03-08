@@ -7,6 +7,11 @@ https://huggingface.co/docs/hub/en/models-downloading
 brew install git-lfs
 git lfs clone https://huggingface.co/mosaicml/mpt-7b-storywriter
 ```
+# Webpage
+https://storyteller-us7ph.ondigitalocean.app/
+
+# Dependencies
+`npm i node`
 
 # Using Library
 ```python
@@ -21,5 +26,3 @@ model = joblib.load(
 )
 ```
 
-# How to use 
-`npm i node`
