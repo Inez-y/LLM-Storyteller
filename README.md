@@ -8,6 +8,14 @@ brew install git-lfs
 git lfs clone https://huggingface.co/mosaicml/mpt-7b-storywriter
 ```
 
+# Webpage
+https://storyteller-us7ph.ondigitalocean.app/
+
+# Server
+https://github.com/Inez-y/LLM-Storyteller-Server.git
+https://storyteller-server-yrha7.ondigitalocean.app/
+
+
 # Using Library
 ```python
 from huggingface_hub import hf_hub_download
