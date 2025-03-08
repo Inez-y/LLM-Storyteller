@@ -20,3 +20,6 @@ model = joblib.load(
     hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
 )
 ```
+
+# How to use 
+`npm i node`
