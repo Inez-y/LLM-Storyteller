@@ -4,7 +4,7 @@ const { getDate } = require("./modules/utils");
 const messages = require("./lang/en/en");
 
 const PORT = 3000;
-const HOST = '0.0.0.0';  
+const HOST = 'https://storyteller-us7ph.ondigitalocean.app/';  
 const ENDPOINT = "/COMP4537/project/storyteller";
 
 const server = http.createServer((req, res) => {
