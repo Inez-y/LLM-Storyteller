@@ -11,6 +11,6 @@ class Initialize {
 // Logic is automatically ready when the page is loaded
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("loginButton").addEventListener("click", () => {
-        window.location.href("../html/login.html")
+        window.location.href("/html/login.html")
     });
 });
