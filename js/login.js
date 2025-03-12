@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   
     try {
       // Make an AJAX POST request to the login endpoint
-      const response = await fetch('https://api.example.com/login', {
+      const response = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
