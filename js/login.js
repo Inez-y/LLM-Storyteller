@@ -22,7 +22,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         document.getElementById('message').textContent = 'Login successful!';
   
         // Check if the user is an admin
-        if (result.admin === true) {
+        if (result.isAdmin === true) {
           // Redirect to the admin dashboard
           window.location.href = '../html/dashboard.html';
         } else {
