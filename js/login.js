@@ -19,7 +19,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       // Check if the request was successful
       if (response.ok) {
         const result = await response.json();
+        console.log(result);
         document.getElementById('message').textContent = 'Login successful!';
+        
   
         // Check if the user is an admin
         if (result.isAdmin === true) {
