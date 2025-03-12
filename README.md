@@ -31,3 +31,12 @@ model = joblib.load(
 
 # How to use 
 `npm i node`
+
+# Test accounts
+```bash
+user-id: john@john.com
+user-pass: 123
+
+admin-id : admin@admin.com
+admin-pass: 111
+```
