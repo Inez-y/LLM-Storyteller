@@ -1,4 +1,4 @@
-import messages from "front/lang/messages/en/user.js"
+import messages from "../lang/messages/en/user.js"
 
 /**
  * @class InitializeGame
