@@ -20,7 +20,15 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       if (response.ok) {
         const result = await response.json();
         document.getElementById('message').textContent = 'Login successful!';
-        // Additional logic upon successful login can be added here
+  
+        // Check if the user is an admin
+        if (result.admin === true) {
+          // Redirect to the admin dashboard
+          window.location.href = '../html/dashboard.html';
+        } else {
+          // Redirect to the landing page
+          window.location.href = '../html/landing.html';
+        }
       } else {
         document.getElementById('message').textContent = 'Login failed. Please try again.';
       }
