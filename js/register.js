@@ -10,11 +10,11 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       // Make an AJAX POST request to the registration endpoint
       const response = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',  // Include cookies in the request
         body: JSON.stringify(data)
       });
+      
   
       // Check the response status and update the UI accordingly
       if (response.ok) {
