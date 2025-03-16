@@ -1,10 +1,14 @@
 // Page for ai chatbot (GPT)
 
-require('dotenv').config();
+// require('dotenv').config();
+console.log(OPENAI_KEY);
+console.log(OPENAI_URL);
 
 async function getGPTResponse(text) {
-    const key = process.env.OPENAI_KEY;
-    const url = process.env.OPENAI_URL;
+    // const key = process.env.OPENAI_KEY;
+    // const url = process.env.OPENAI_URL;
+    const key = OPENAI_KEY;
+    const url = OPENAI_URL;
 
     console.log("OPENAI_KEY:", key); // Debugging
     console.log("OPENAI_URL:", url); // Debugging
