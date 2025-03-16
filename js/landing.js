@@ -1,6 +1,8 @@
 // Page for ai chatbot (GPT)
 
 // require('dotenv').config();
+// console.log(process.env.OPENAI_KEY);
+// console.log(process.env.OPENAI_URL);
 console.log(OPENAI_KEY);
 console.log(OPENAI_URL);
 

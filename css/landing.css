@@ -28,11 +28,11 @@ body {
     color: black;
   }
   .hero {
-    background: url('hero.jpg') no-repeat center center/cover;
+    /* background: url('hero.jpg') no-repeat center center/cover; */
     height: 400px;
     position: relative;
     text-align: center;
-    color: white;
+    color: grey;
   }
   .hero h1 {
     margin: 0;
