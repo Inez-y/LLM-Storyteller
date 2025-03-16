@@ -33,6 +33,7 @@ model = joblib.load(
 `npm i node`
 `npm i dotenv`
 `npm install express cors dotenv`
+`npm install openai`
 lite-server for testing
 
 
