@@ -32,6 +32,9 @@ model = joblib.load(
 # How to use 
 `npm i node`
 `npm i dotenv`
+`npm install express cors dotenv`
+lite-server for testing
+
 
 # Test accounts
 ```bash

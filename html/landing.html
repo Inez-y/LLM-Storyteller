@@ -17,10 +17,18 @@
   <div class="content">
     <!-- User Input Section -->
     <div class="user-input">
-      <h2>Get in Touch</h2>
       <form action="#" method="post">
-        <input type="text" id="user-message" name="userMessage" placeholder="Enter your message here">
-        <button type="submit" id="submit-button">Submit</button>
+
+        <div class="chat-container">
+          <h2>Chat with GPT</h2>
+          <div class="chat-box" id="chat-box"></div>
+  
+          <div class="input-container">
+              <input type="text" id="user-message" placeholder="Type your message...">
+              <button id="submit-button">Send</button>
+          </div>
+        </div>
+
       </form>
 
       <div id="gpt-response"></div>
