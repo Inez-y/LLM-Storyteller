@@ -31,6 +31,7 @@ model = joblib.load(
 
 # How to use 
 `npm i node`
+`npm i dotenv`
 
 # Test accounts
 ```bash
