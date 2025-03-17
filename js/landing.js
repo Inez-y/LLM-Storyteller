@@ -19,9 +19,12 @@
 // import env from "dotenv";
 
 async function getGPTResponse(text) {
-    const key = OPENAI_KEY; //|| env.OPENAI_KEY;//process.env.OPENAI_KEY;
-    const url = OPENAI_URL; //|| env.OPENAI_URL; //process.env.OPENAI_URL; 
+    const key = process.env.OPENAI_KEY; //|| env.OPENAI_KEY;//process.env.OPENAI_KEY;
+    const url = process.env.OPENAI_URL; //|| env.OPENAI_URL; //process.env.OPENAI_URL; 
 
+    console.log("DEBUG: OpenAI Key ->", key);
+    console.log("DEBUG: OpenAI URL ->", url);
+    
     try {
         const response = await fetch(url, {
             method: "POST",
