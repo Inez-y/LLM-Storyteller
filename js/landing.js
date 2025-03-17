@@ -20,7 +20,7 @@ async function getGPTResponse(text) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer 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`
+                "Authorization": `Bearer ${OPENAI_KEY}`
             },
             body: JSON.stringify({
                 model: "gpt-4",
