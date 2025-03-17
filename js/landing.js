@@ -19,11 +19,11 @@
 
 
 async function getGPTResponse(text) {
-    const key = OPENAI_KEY //process.env.OPENAI_KEY;
-    const url = OPENAI_URL //process.env.OPENAI_URL; 
-
     console.log("OPENAI_KEY:", OPENAI_KEY); // Debugging
     console.log("OPENAI_URL:", OPENAI_URL); // Debugging
+    
+    const key = OPENAI_KEY //process.env.OPENAI_KEY;
+    const url = OPENAI_URL //process.env.OPENAI_URL; 
 
     try {
         const response = await fetch(url, {
