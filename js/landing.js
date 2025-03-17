@@ -12,19 +12,13 @@
  * @returns 
  */
 
-// require('dotenv').config();
-// import fs from "fs";
-// import path from "path";
-// import OpenAI from "openai";
-// import env from "dotenv";
-
 async function getGPTResponse(text) {
     const key = window.APP_CONFIG.OPENAI_KEY;
     const url = window.APP_CONFIG.OPENAI_URL;
     
     console.log("DEBUG: OpenAI Key ->", key);
     console.log("DEBUG: OpenAI URL ->", url);
-    
+
     try {
         const response = await fetch(url, {
             method: "POST",
@@ -37,13 +31,20 @@ async function getGPTResponse(text) {
                 messages: [{ role: "user", content: text }]
             })
         });
-        console.log(response);
+
+        console.log("DEBUG: Raw Response ->", response);
+
+        // Wait for full response before proceeding
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            const errorData = await response.json();
+            console.error("Error Response from OpenAI:", errorData);
+            throw new Error(`HTTP error! Status: ${response.status} - ${errorData.error?.message || "Unknown error"}`);
         }
 
         const data = await response.json();
-        return data.choices[0].message.content;
+        console.log("DEBUG: Parsed GPT Response ->", data);
+        
+        return data.choices?.[0]?.message?.content || "No response from GPT.";
 
     } catch (error) {
         console.error("Error fetching GPT response:", error);
@@ -84,7 +85,7 @@ function appendMessage(text, sender) {
 //     await fs.promises.writeFile(speechFile, buffer);
 // };
 
-document.getElementById("submit-button").addEventListener("click", async (event) => {
+ddocument.getElementById("submit-button").addEventListener("click", async (event) => {
     // Prevent form from refreshing
     event.preventDefault(); 
 
@@ -102,13 +103,17 @@ document.getElementById("submit-button").addEventListener("click", async (event)
     // Clear input field
     userMessageInput.value = "";
 
-    // Get GPT response
-    getGPTResponse(userMessage).then(response => {
+    // Wait for GPT response before proceeding
+    try {
+        const response = await getGPTResponse(userMessage);
         console.log("GPT said:", response);
         appendMessage(response, "bot"); 
-        // speakAloud(response);
-    });
+    } catch (error) {
+        console.error("Failed to get GPT response:", error);
+        appendMessage("Sorry, there was an issue fetching the response.", "bot");
+    }
 });
+
 
 // A temp function to convert text to speech
 function speakText(text) {

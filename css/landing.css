@@ -100,11 +100,11 @@ body {
   button {
       padding: 10px 15px;
       border: none;
-      background: #033974;
+      background: #008c2f;
       color: white;
       border-radius: 5px;
       cursor: pointer;
   }
   button:hover {
-      background: #7aa7d6;
+      background: #02f1a9;
   }
