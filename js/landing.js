@@ -19,11 +19,11 @@
 
 
 async function getGPTResponse(text) {
-    const key = "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";
-    const url = "https://api.openai.com/v1/chat/completions";
+    const key = OPENAI_KEY || process.env.OPENAI_KEY;
+    const url = OPENAI_URL || process.env.OPENAI_URL; 
 
-    console.log("OPENAI_KEY:", key); // Debugging
-    console.log("OPENAI_URL:", url); // Debugging
+    // console.log("OPENAI_KEY:", key); // Debugging
+    // console.log("OPENAI_URL:", url); // Debugging
 
 
     try {
@@ -38,7 +38,7 @@ async function getGPTResponse(text) {
                 messages: [{ role: "user", content: text }]
             })
         });
-
+        console.log(response);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
