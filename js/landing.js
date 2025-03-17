@@ -22,8 +22,8 @@ async function getGPTResponse(text) {
     console.log("OPENAI_KEY:", OPENAI_KEY); // Debugging
     console.log("OPENAI_URL:", OPENAI_URL); // Debugging
 
-    const key = OPENAI_KEY; //process.env.OPENAI_KEY;
-    const url = OPENAI_URL; //process.env.OPENAI_URL; 
+    const key = OPENAI_KEY || "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;" //process.env.OPENAI_KEY;
+    const url = OPENAI_URL || "https://api.openai.com/v1/chat/completions"; //process.env.OPENAI_URL; 
 
     try {
         const response = await fetch(url, {
