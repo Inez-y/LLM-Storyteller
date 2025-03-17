@@ -13,18 +13,14 @@
  */
 
 async function getGPTResponse(text) {
-    const key = "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";
     const url = "https://api.openai.com/v1/chat/completions";
-    
-    console.log("DEBUG: OpenAI Key ->", key);
-    console.log("DEBUG: OpenAI URL ->", url);
 
     try {
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${key}`
+                "Authorization": `Bearer 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`
             },
             body: JSON.stringify({
                 model: "gpt-4",
