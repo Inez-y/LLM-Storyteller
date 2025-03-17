@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to Our Website</title>
+  <title>Welcome to MyDuolingo</title>
   <link rel="stylesheet" href="../css/landing.css">
   <style>
     /* Basic styling for the landing page */
@@ -12,7 +12,7 @@
 </head>
 <body>
   <section class="hero">
-    <h1>Storyteller</h1>
+    <h1>MyDuolingo</h1>
   </section>
   <div class="content">
     <!-- User Input Section -->
@@ -20,7 +20,7 @@
       <form action="#" method="post">
 
         <div class="chat-container">
-          <h2>Chat with AI</h2>
+          <h2>Chat with MyDuolingo</h2>
           <div class="chat-box" id="chat-box"></div>
   
           <div class="input-container">
@@ -37,6 +37,13 @@
   <footer>
     <p>&copy; COMP4537 Storyteller. All rights reserved.</p>
   </footer>
+  <script>
+    window.APP_CONFIG = {
+      OPENAI_KEY: "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",
+      OPENAI_URL: "https://api.openai.com/v1/chat/completions"
+    };
+  </script>
+  
   <script type="module" src="../js/landing.js"></script>
 </body>
 </html>
