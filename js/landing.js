@@ -13,8 +13,8 @@
  */
 
 async function getGPTResponse(text) {
-    const key = window.APP_CONFIG.OPENAI_KEY;
-    const url = window.APP_CONFIG.OPENAI_URL;
+    const key = "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";
+    const url = "https://api.openai.com/v1/chat/completions";
     
     console.log("DEBUG: OpenAI Key ->", key);
     console.log("DEBUG: OpenAI URL ->", url);
