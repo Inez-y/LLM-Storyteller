@@ -16,11 +16,11 @@
 // import fs from "fs";
 // import path from "path";
 // import OpenAI from "openai";
-import env from "dotenv";
+// import env from "dotenv";
 
 async function getGPTResponse(text) {
-    const key = OPENAI_KEY || env.OPENAI_KEY;//process.env.OPENAI_KEY;
-    const url = OPENAI_URL || env.OPENAI_URL; //process.env.OPENAI_URL; 
+    const key = OPENAI_KEY; //|| env.OPENAI_KEY;//process.env.OPENAI_KEY;
+    const url = OPENAI_URL; //|| env.OPENAI_URL; //process.env.OPENAI_URL; 
 
     try {
         const response = await fetch(url, {
