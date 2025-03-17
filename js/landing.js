@@ -85,7 +85,7 @@ function appendMessage(text, sender) {
 //     await fs.promises.writeFile(speechFile, buffer);
 // };
 
-ddocument.getElementById("submit-button").addEventListener("click", async (event) => {
+document.getElementById("submit-button").addEventListener("click", async (event) => {
     // Prevent form from refreshing
     event.preventDefault(); 
 
