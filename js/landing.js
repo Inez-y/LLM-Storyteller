@@ -26,6 +26,12 @@ async function getGPTResponse(prompt) {
         }
 
         const data = await response.json();
+
+        // Play the audio if available
+        if (data.audio) {
+            playAudio(data.audio);
+        }
+
         return data.response || "No response received."; 
     } catch (error) {
         console.error("Fetch error:", error);
@@ -74,35 +80,17 @@ function appendMessage(text, sender) {
     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
 
     // Speak bot response (temp)
-    if (sender === "bot") {
-        speakText(text);
-    }
+    // if (sender === "bot") {
+    //     speakText(text);
+    // }
 }
 
-// // Function to speak
-// // async function speakAloud(response) {
-// //     const openai = new OpenAI();
-// //     const speechFile = path.resolve("./speech.mp3");
-// //     const mp3 = await openai.audio.speech.create(
-// //         model="tts-1",
-// //         voice="onyx",
-// //         input=response,
-// //     )
+// Function to play base64 audio
+function playAudio(base64Audio) {
+    // the base64-encoded audio 
+    const audioBlob = new Blob([new Uint8Array(atob(base64Audio).split("").map(c => c.charCodeAt(0)))], { type: "audio/wav" });
 
-// //     const buffer = Buffer.from(await mp3.arrayBuffer());
-// //     await fs.promises.writeFile(speechFile, buffer);
-// // };
-
-
-
-
-// A temp function to convert text to speech: basic tts
-function speakText(text) {
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US"; // Adjust for other languages if needed
-    utterance.rate = 1; // Speed (1 is normal, 0.5 is slow, 2 is fast)
-    utterance.pitch = 1; // Pitch (1 is normal, 0.5 is deep, 2 is high)
-    
-    synth.speak(utterance);
+    const audioURL = URL.createObjectURL(audioBlob);
+    const audio = new Audio(audioURL);
+    audio.play();
 }
