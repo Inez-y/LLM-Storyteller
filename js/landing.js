@@ -15,11 +15,16 @@
 // Fetch GPT response from backend
 async function getGPTResponse(prompt) {
     try {
-        const response = await fetch("https://storyteller-us7ph.ondigitalocean.app/html/landing.html", {
+        const response = await fetch("https://storyteller-us7ph.ondigitalocean.app/landing", {  // Corrected API URL
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt }) 
         });
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
         const data = await response.json();
         return data.response || "No response received."; 
     } catch (error) {
@@ -27,7 +32,6 @@ async function getGPTResponse(prompt) {
         return "Error connecting to AI.";
     }
 }
-
 
 document.getElementById("submit-button").addEventListener("click", async (event) => {
     // Prevent form from refreshing

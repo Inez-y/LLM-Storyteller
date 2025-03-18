@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to MyDuolingo</title>
+  <link rel="stylesheet" href="../css/landing.css">
+  <style>
+    /* Basic styling for the landing page */
+    
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>MyDuolingo</h1>
+  </section>
+  <div class="content">
+    <!-- User Input Section -->
+    <div class="user-input">
+      <form action="#" method="post">
+
+        <div class="chat-container">
+          <h2>Chat with MyDuolingo</h2>
+          <div class="chat-box" id="chat-box"></div>
+  
+          <div class="input-container">
+              <input type="text" id="user-message" placeholder="Type your message...">
+              <button id="submit-button">Send</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div id="gpt-response"></div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; COMP4537 MyDuolingo. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="../js/landing.js"></script>
+</body>
+</html>
