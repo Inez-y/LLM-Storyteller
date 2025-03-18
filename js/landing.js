@@ -1,4 +1,3 @@
-
 /**
  * 
  * A landing page that serves AI functionality.
@@ -12,60 +11,69 @@
 
  */
 
-// async function getGPTResponse(text) {
-//     const url = "https://api.openai.com/v1/chat/completions";
 
-//     try {
-//         const response = await fetch(url, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "Authorization": `Bearer ${OPENAI_KEY}`
-//             },
-//             body: JSON.stringify({
-//                 model: "gpt-4",
-//                 messages: [{ role: "user", content: text }]
-//             })
-//         });
-
-//         console.log("DEBUG: Raw Response ->", response);
-
-//         // Wait for full response before proceeding
-//         if (!response.ok) {
-//             const errorData = await response.json();
-//             console.error("Error Response from OpenAI:", errorData);
-//             throw new Error(`HTTP error! Status: ${response.status} - ${errorData.error?.message || "Unknown error"}`);
-//         }
-
-//         const data = await response.json();
-//         console.log("DEBUG: Parsed GPT Response ->", data);
-        
-//         return data.choices?.[0]?.message?.content || "No response from GPT.";
-
-//     } catch (error) {
-//         console.error("Error fetching GPT response:", error);
-//         return "Error retrieving response.";
-//     }
-// }
+// Fetch GPT response from backend
+async function getGPTResponse(prompt) {
+    try {
+        const response = await fetch("https://storyteller-us7ph.ondigitalocean.app/html/landing.html", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt }) 
+        });
+        const data = await response.json();
+        return data.response || "No response received."; 
+    } catch (error) {
+        console.error("Fetch error:", error);
+        return "Error connecting to AI.";
+    }
+}
 
 
-// // Function to append messages to chat
-// function appendMessage(text, sender) {
-//     const chatBox = document.getElementById("chat-box");
-//     const messageDiv = document.createElement("div");
+document.getElementById("submit-button").addEventListener("click", async (event) => {
+    // Prevent form from refreshing
+    event.preventDefault(); 
 
-//     messageDiv.classList.add("message");
-//     messageDiv.classList.add(sender === "user" ? "user-message" : "bot-message");
-//     messageDiv.innerText = text;
+    const userMessageInput = document.getElementById("user-message");
+    const userMessage = userMessageInput.value.trim();
+
+    // Prevent empty messages
+    if (userMessage === "") return; 
+
+    console.log("User asked:", userMessage);
+
+    // Display user message in chat
+    appendMessage(userMessage, "user");
+
+    // Clear input field
+    userMessageInput.value = "";
+
+    // Wait for GPT response before proceeding
+    try {
+        const response = await getGPTResponse(userMessage);
+        appendMessage(response, "bot"); 
+    } catch (error) {
+        console.error("Failed to get GPT response:", error);
+        appendMessage("Sorry, there was an issue fetching the response.", "bot");
+    }
+});
+
+// Function to append messages to chat
+function appendMessage(text, sender) {
+    const chatBox = document.getElementById("chat-box");
+    const messageDiv = document.createElement("div");
+
+    messageDiv.classList.add("message");
+    messageDiv.classList.add(sender === "user" ? "user-message" : "bot-message");
+    messageDiv.innerText = text;
     
-//     chatBox.appendChild(messageDiv);
-//     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
 
-//     // Speak bot response (temp)
-//     if (sender === "bot") {
-//         speakText(text);
-//     }
-// }
+    // Speak bot response (temp)
+    if (sender === "bot") {
+        speakText(text);
+    }
+}
 
 // // Function to speak
 // // async function speakAloud(response) {
@@ -81,34 +89,7 @@
 // //     await fs.promises.writeFile(speechFile, buffer);
 // // };
 
-// document.getElementById("submit-button").addEventListener("click", async (event) => {
-//     // Prevent form from refreshing
-//     event.preventDefault(); 
 
-//     const userMessageInput = document.getElementById("user-message");
-//     const userMessage = userMessageInput.value.trim();
-
-//     // Prevent empty messages
-//     if (userMessage === "") return; 
-
-//     console.log("User asked:", userMessage);
-
-//     // Display user message in chat
-//     appendMessage(userMessage, "user");
-
-//     // Clear input field
-//     userMessageInput.value = "";
-
-//     // Wait for GPT response before proceeding
-//     try {
-//         const response = await getGPTResponse(userMessage);
-//         console.log("GPT said:", response);
-//         appendMessage(response, "bot"); 
-//     } catch (error) {
-//         console.error("Failed to get GPT response:", error);
-//         appendMessage("Sorry, there was an issue fetching the response.", "bot");
-//     }
-// });
 
 
 // // A temp function to convert text to speech
@@ -121,16 +102,3 @@
     
 //     synth.speak(utterance);
 // }
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const url = "https://storyteller-server-yrha7.ondigitalocean.app/";
-    fetch(`${url}landing`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: "Hello, AI!" }),
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
-});
