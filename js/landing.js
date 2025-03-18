@@ -15,7 +15,7 @@
 // Fetch GPT response from backend
 async function getGPTResponse(prompt) {
     try {
-        const response = await fetch("https://storyteller-server-yrha7.ondigitalocean.app/login", {  // Corrected API URL
+        const response = await fetch("https://storyteller-server-yrha7.ondigitalocean.app/landing", {  // Corrected API URL
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt }) 
