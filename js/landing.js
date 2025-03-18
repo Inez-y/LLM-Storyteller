@@ -1,6 +1,4 @@
-import OpenAI from "openai";
-const openai = new OpenAI();
-console.log(openai);
+
 /**
  * 
  * A landing page that serves AI functionality.
@@ -123,3 +121,16 @@ console.log(openai);
     
 //     synth.speak(utterance);
 // }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const url = "https://storyteller-server-yrha7.ondigitalocean.app/";
+    fetch(`${url}landing`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: "Hello, AI!" }),
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));
+});
