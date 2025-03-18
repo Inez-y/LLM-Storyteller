@@ -92,13 +92,13 @@ function appendMessage(text, sender) {
 
 
 
-// // A temp function to convert text to speech
-// function speakText(text) {
-//     const synth = window.speechSynthesis;
-//     const utterance = new SpeechSynthesisUtterance(text);
-//     utterance.lang = "en-US"; // Adjust for other languages if needed
-//     utterance.rate = 1; // Speed (1 is normal, 0.5 is slow, 2 is fast)
-//     utterance.pitch = 1; // Pitch (1 is normal, 0.5 is deep, 2 is high)
+// A temp function to convert text to speech: basic tts
+function speakText(text) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US"; // Adjust for other languages if needed
+    utterance.rate = 1; // Speed (1 is normal, 0.5 is slow, 2 is fast)
+    utterance.pitch = 1; // Pitch (1 is normal, 0.5 is deep, 2 is high)
     
-//     synth.speak(utterance);
-// }
+    synth.speak(utterance);
+}
