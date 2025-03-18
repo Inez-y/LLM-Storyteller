@@ -27,18 +27,7 @@ async function getGPTResponse(prompt) {
         const data = await response.json();
         console.log("Server Response:", data);  
 
-        // Play the audio if available
-        if (data.audio ) {
-            playAudio(data.audio);
-        }
-        // Check if response contains text
-        if (data.response) {
-            appendMessage(data.response, "bot");  // Display the chatbot response
-        } else {
-            appendMessage("No response received.", "bot");
-        }
-
-        return data.response || "No response received."; 
+        // return data.response || "No response received."; 
     } catch (error) {
         console.error("Fetch error:", error);
         return "Error connecting to AI.";
@@ -67,6 +56,12 @@ document.getElementById("submit-button").addEventListener("click", async (event)
     try {
         const response = await getGPTResponse(userMessage);
         console.log("GPT says: ", response);
+
+        // Play the audio if available
+        if (data.audio ) {
+            playAudio(data.audio);
+        }
+
         appendMessage(response, "bot"); 
     } catch (error) {
         console.error("Failed to get GPT response:", error);
