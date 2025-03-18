@@ -11,7 +11,6 @@
 
  */
 
-
 // Fetch GPT response from backend
 async function getGPTResponse(prompt) {
     try {
@@ -26,12 +25,13 @@ async function getGPTResponse(prompt) {
         }
 
         const data = await response.json();
+        console.log(data);
 
         // Play the audio if available
         if (data.audio) {
             playAudio(data.audio);
         }
-
+        console.log(data.respons);
         return data.response || "No response received."; 
     } catch (error) {
         console.error("Fetch error:", error);
@@ -60,6 +60,7 @@ document.getElementById("submit-button").addEventListener("click", async (event)
     // Wait for GPT response before proceeding
     try {
         const response = await getGPTResponse(userMessage);
+        console.log("GPT says: ", response);
         appendMessage(response, "bot"); 
     } catch (error) {
         console.error("Failed to get GPT response:", error);
@@ -78,14 +79,9 @@ function appendMessage(text, sender) {
     
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
-
-    // Speak bot response (temp)
-    // if (sender === "bot") {
-    //     speakText(text);
-    // }
 }
 
-// Function to play base64 audio
+// Function to play base64 audio 
 function playAudio(base64Audio) {
     // the base64-encoded audio 
     const audioBlob = new Blob([new Uint8Array(atob(base64Audio).split("").map(c => c.charCodeAt(0)))], { type: "audio/wav" });
