@@ -12,7 +12,7 @@
 async function getGPTResponse(prompt) {
     try {
         const response = await fetch("https://storyteller-server-yrha7.ondigitalocean.app/landing", {  
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt }) 
         });
