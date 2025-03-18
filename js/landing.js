@@ -17,31 +17,28 @@ async function getGPTResponse(prompt) {
             body: JSON.stringify({ prompt }) 
         });
 
-        const data = await response.json();
-        console.log("Server Response:", data);  
-
         if (!response.ok) {
             throw new Error(`Server error: ${response.status}`);
         }
 
-        // Display chatbot response
-        if (data.response) {
-            appendMessage(data.response, "bot");  
-        } else {
-            appendMessage("No response received.", "bot");
-        }
+        const data = await response.json();
+        console.log("Server Response:", data);
 
-        // Play the audio if available
+        const botReply = data.response || "No response received.";
+        appendMessage(botReply, "bot");
+
         if (data.audio) {
             playAudio(data.audio);
         }
 
-        return data.response || "No response received."; 
+        return botReply;
     } catch (error) {
         console.error("Fetch error:", error);
+        appendMessage("Error connecting to AI.", "bot");
         return "Error connecting to AI.";
     }
 }
+
 
 document.getElementById("submit-button").addEventListener("click", async (event) => {
     event.preventDefault(); 
