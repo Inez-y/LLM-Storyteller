@@ -8,18 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchUsers() {
     try {
       const response = await fetch(`${API_BASE_URL}/get-users`);
+      const response2 = await fetch(`${API_BASE_URL}/get-user-usage`);
       if (!response.ok) throw new Error('Failed to fetch users');       
       const users = await response.json();
+      const userUsage = await response2.json();
       console.log(users);
       tableBody.innerHTML = '';
-      users.forEach(user => addUserRow(user));
+      
+      users.forEach(user => {
+        // Find the usage data for the current user.
+        const usage = userUsage.find(u => u.userId === user.id);
+        // Pass both user and usage to the row-rendering function.
+        addUserRow(user, usage);
+      });
     } catch (error) {
       console.error('Error fetching users:', error);
     }
   }
+  
 
   // Add a row for a user to the table
-  function addUserRow(user) {
+  function addUserRow(user, userUsage) {
     const tr = document.createElement('tr');
 
     // ID cell (non-editable)
@@ -40,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     tdPassword.classList.add('editable');
     tdPassword.addEventListener('click', () => makeCellEditable(tdPassword, user, 'password'));
     tr.appendChild(tdPassword);
+    
+    const tdUsage = document.createElement('td');
+    tdUsage.textContent = userUsage ? usage.details : 'No Usage Data';
+    tr.appendChild(tdUsage);
 
     // Actions cell with a Delete button
     const tdActions = document.createElement('td');
