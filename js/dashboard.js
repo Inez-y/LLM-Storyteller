@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error('Failed to update user');
       console.log(`User ${userId} updated: ${field} set to ${newValue}`);
     } catch (error) {
+      inputWindow.type = 'text';
       inputWindow.value = originalValue;
       console.error('Error updating user:', error);
 
