@@ -6,8 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const response = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/get-users');
         if (!response.ok) throw new Error('Failed to fetch users');
-        console.log(response.json());
+        console.log(response);
+       
         const users = await response.json();
+        console.log(users);
         tableBody.innerHTML = '';
         users.forEach(user => addUserRow(user));
       } catch (error) {
