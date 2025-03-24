@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const newValue = input.value;
       td.textContent = newValue;
       if (newValue !== originalValue) {
-        updateUser(user.id, field, newValue);
+        updateUser(user.id, field, newValue, originalValue, input);
       }
     });
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Update a user record via API using the environment variable for the URL
-  async function updateUser(userId, field, newValue) {
+  async function updateUser(userId, field, newValue, originalValue, inputWindow) {
     try {
       const response = await fetch(`${API_BASE_URL}/update-user`, {
         method: 'PUT',
@@ -90,7 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error('Failed to update user');
       console.log(`User ${userId} updated: ${field} set to ${newValue}`);
     } catch (error) {
+      inputWindow.value = originalValue;
       console.error('Error updating user:', error);
+
     }
   }
 
