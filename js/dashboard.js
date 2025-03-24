@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Define the base URL using an environment variable.
   // When using a bundler, ensure that process.env.API_BASE_URL is replaced with the actual value.
-  const API_BASE_URL = process.env.API_BASE_URL || 'https://storyteller-server-yrha7.ondigitalocean.app';
+  const API_BASE_URL = 'https://storyteller-server-yrha7.ondigitalocean.app';
   const tableBody = document.querySelector('#usersTable tbody');
 
   // Fetch users from the API and populate the table
