@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tr.appendChild(tdPassword);
     
     const tdUsage = document.createElement('td');
-    tdUsage.textContent = userUsage ? usage.details : 'No Usage Data';
+    tdUsage.textContent = userUsage ? userUsage.details : 'No Usage Data';
     tr.appendChild(tdUsage);
 
     // Actions cell with a Delete button
