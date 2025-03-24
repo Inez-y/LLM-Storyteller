@@ -5,9 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchUsers() {
       try {
         const response = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/get-users');
-        if (!response.ok) throw new Error('Failed to fetch users');
-        console.log(response);
-       
+        if (!response.ok) throw new Error('Failed to fetch users');       
         const users = await response.json();
         console.log(users);
         tableBody.innerHTML = '';
