@@ -53,49 +53,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Convert a table cell into an editable input
-  function makeCellEditable(td, user, field) {
-    if (td.querySelector('input')) return; // Already editing
+function makeCellEditable(td, user, field) {
+  if (td.querySelector('input')) return; // Already editing
 
-    const originalValue = td.textContent;
-    td.textContent = '';
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = originalValue;
-    td.appendChild(input);
-    input.focus();
+  const originalValue = td.textContent;
+  td.textContent = '';
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = originalValue;
+  td.appendChild(input);
+  input.focus();
 
-    input.addEventListener('blur', () => {
-      const newValue = input.value;
-      td.textContent = newValue;
-      if (newValue !== originalValue) {
-        updateUser(user.id, field, newValue, originalValue, input);
-      }
-    });
+  input.addEventListener('blur', () => {
+    const newValue = input.value;
+    // Call updateUser and let it update the cell on success,
+    // or revert it back to originalValue on failure.
+    updateUser(user.id, field, newValue, originalValue, td);
+  });
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        input.blur();
-      }
-    });
-  }
-
-  // Update a user record via API using the environment variable for the URL
-  async function updateUser(userId, field, newValue, originalValue, inputWindow) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/update-user`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: userId, [field]: newValue })
-      });
-      if (!response.ok) throw new Error('Failed to update user');
-      console.log(`User ${userId} updated: ${field} set to ${newValue}`);
-    } catch (error) {
-      inputWindow.type = 'text';
-      inputWindow.value = originalValue;
-      console.error('Error updating user:', error);
-
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      input.blur();
     }
+  });
+}
+
+// Update a user record via API and update the cell accordingly
+async function updateUser(userId, field, newValue, originalValue, td) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/update-user`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: userId, [field]: newValue })
+    });
+    if (!response.ok) throw new Error('Failed to update user');
+    console.log(`User ${userId} updated: ${field} set to ${newValue}`);
+    // On success, update the cell's text content to the new value.
+    td.textContent = newValue;
+  } catch (error) {
+    console.error('Error updating user:', error);
+    // On error, revert to the original value.
+    td.textContent = originalValue;
   }
+}
+
 
   // Delete a user record via API using the environment variable for the URL
   async function deleteUser(userId, rowElement) {
