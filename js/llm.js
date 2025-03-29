@@ -14,6 +14,7 @@ const handleTranslate = async () => {
     const targetLang = document.getElementById("translateLanguageInput").value;
     const input = document.getElementById("translateInput").value;
     const prompt = `Translate to ${targetLang}: ${input}`;
+    console.log(targetLang, input, prompt);
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++; 
     updateApiStats();
 
@@ -25,7 +26,9 @@ const handleTranslate = async () => {
         }
 
         const result = await response.json();
+        console.log('result:', result);
         const cleanedText = cleanText(result.translatedText);
+        console.log('cleanedText:', cleanedTExt);
 
         document.getElementById("translationResult").textContent = 'Translated Text: ' + cleanedText;
 
@@ -46,7 +49,7 @@ const handleQuestion = async () => {
     const prompt = `Please answer to the following question. ${input}`;
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++;
     updateApiStats();
-
+    console.log(input, prompt)
     try {
         const response = await fetch(url, { method: 'GET' });
 
@@ -55,7 +58,9 @@ const handleQuestion = async () => {
         }
 
         const result = await response.json();
+        console.log('result:', result);
         const cleanedText = cleanText(result.translatedText);
+        console.log('cleanedTExt:', cleanedText);
 
         document.getElementById("questionResult").textContent = 'Answer: ' + cleanedText;
 
