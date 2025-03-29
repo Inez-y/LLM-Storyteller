@@ -81,10 +81,8 @@ const handleQuestion = async () => {
 
 // Parse the outcome from the LLM server
 const cleanText = (text) => {
-    return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim() || text.replace(/<unk>/g, '').replace(/<\/s>/g, '').trim()
-    //croatian: Translated Text: Dobro, <unk>e sam na <unk>emu sam
-    //polish: Oto tak, <unk>e wyst<unk>pujemy n
-    // russian: <unk> <unk>а<unk>а<unk>
-    // turkish : <unk>aş<unk>m<unk>z olmad<unk>n<unk>
-    //german, 
+    if (text.includes('</unk>')) {
+        return 'Oops! I\'m not familiar with that language...'
+    }
+    return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
