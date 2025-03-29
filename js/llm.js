@@ -19,6 +19,7 @@ const handleTranslate = async () => {
     updateApiStats();
 
     try {
+        document.getElementById("translationResult").textContent = 'Loading...';
         const response = await fetch(url, { method: 'GET' });
 
         if (!response.ok) {
@@ -26,9 +27,9 @@ const handleTranslate = async () => {
         }
 
         const result = await response.json();
-        console.log('result:', result);
+        //console.log('result:', result);
         const cleanedText = cleanText(result.translatedText);
-        console.log('cleanedText:', cleanedText);
+        //console.log('cleanedText:', cleanedText);
 
         document.getElementById("translationResult").textContent = 'Translated Text: ' + cleanedText;
 
@@ -49,8 +50,11 @@ const handleQuestion = async () => {
     const prompt = `Please answer to the following question. ${input}`;
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++;
     updateApiStats();
-    console.log(input, prompt)
+    //console.log(input, prompt)
     try {
+        // Loading message for user
+        document.getElementById("questionResult").textContent = 'Loading...';
+
         const response = await fetch(url, { method: 'GET' });
 
         if (!response.ok) {
@@ -58,9 +62,9 @@ const handleQuestion = async () => {
         }
 
         const result = await response.json();
-        console.log('result:', result);
+        //console.log('result:', result);
         const cleanedText = cleanText(result.translatedText);
-        console.log('cleanedTExt:', cleanedText);
+        // console.log('cleanedTExt:', cleanedText);
 
         document.getElementById("questionResult").textContent = 'Answer: ' + cleanedText;
 
@@ -75,6 +79,7 @@ const handleQuestion = async () => {
     }
 };
 
+// Parse the outcome from the LLM server
 const cleanText = (text) => {
     return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
