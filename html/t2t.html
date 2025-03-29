@@ -31,6 +31,15 @@
             <button class="btn" onclick="handleQuestion()">Ask</button>
             <div id="questionResult"></div>
         </section>
+
+        <section class="section">
+            <h2>Your API Consumption Statistics</h2>
+            <div id="apiUsageStats">
+                <p>Total API Calls: <span id="totalApiCalls">0</span></p>
+                <p>Successful Requests: <span id="successfulRequests">0</span></p>
+                <p>Failed Requests: <span id="failedRequests">0</span></p>
+            </div>
+        </section>
     </div>
 
     <script src="../js/llm.js"></script>

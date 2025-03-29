@@ -28,7 +28,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
           window.location.href = './dashboard.html';
         } else {
           // Redirect to the landing page
-          window.location.href = './landing.html';
+          window.location.href = './t2t.html';
         }
       } else {
         document.getElementById('message').textContent = 'Login failed. Please try again.';
