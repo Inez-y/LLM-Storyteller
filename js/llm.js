@@ -28,7 +28,7 @@ const handleTranslate = async () => {
         const result = await response.json();
         console.log('result:', result);
         const cleanedText = cleanText(result.translatedText);
-        console.log('cleanedText:', cleanedTExt);
+        console.log('cleanedText:', cleanedText);
 
         document.getElementById("translationResult").textContent = 'Translated Text: ' + cleanedText;
 
