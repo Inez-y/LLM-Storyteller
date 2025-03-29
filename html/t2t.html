@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask MyDuolingo</title>
+    <link rel="stylesheet" href="../css/t2t.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Do you have any question?</h1>
+
+        <section class="section">
+            <p>To translate, enter as <br>
+                "Translate to French: Hello world" <br>
+                without double quotes.</p>
+            <input id="translateInput" type="text" placeholder="Enter translation prompt">
+            <button class="btn" onclick="handleTranslate()">Translate</button>
+            <div id="translationResult"></div>
+        </section>
+
+        <section class="section">
+            <p>To get an answer about a question, enter as <br>
+                "Please answer to the following question. <br>
+                What is the storyline of The Three Little Pigs?" <br>
+                without double quotes.</p>
+            <input id="questionInput" type="text" placeholder="Enter your question">
+            <button class="btn" onclick="handleQuestion()">Ask</button>
+            <div id="questionResult"></div>
+        </section>
+    </div>
+
+    <script src="../js/llm.js"></script>
+</body>
+
+</html>
