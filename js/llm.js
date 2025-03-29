@@ -13,7 +13,7 @@ const updateApiStats = () => {
 const handleTranslate = async () => {
     const targetLang = document.getElementById("translateLanguageInput").value;
     const input = document.getElementById("translateInput").value;
-    const prompt = "Translate to " + targetLang + input;
+    const prompt = `Translate to ${targetLang}: ${input}`;
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++; 
     updateApiStats();
 
@@ -43,7 +43,7 @@ const handleTranslate = async () => {
 // [Ask Teacher]: The second text box
 const handleQuestion = async () => {
     const input = document.getElementById("questionInput").value;
-    const propt = "Please answer to the following question. " + input;
+    const prompt = `Please answer to the following question. ${input}`;
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++;
     updateApiStats();
 
