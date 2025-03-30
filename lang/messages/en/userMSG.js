@@ -15,4 +15,7 @@ export default {
     regisOK: 'Registration successful!',
     regisFail: 'Registration failed. Please try again.',
     regisErr: 'An error occurred. Please try again.',
+    logoutErr: "Error during logout. Please try again.",
+    logoutFail: "Logout failed. Please try again.",
+    
 };

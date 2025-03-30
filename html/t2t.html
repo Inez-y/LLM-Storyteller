@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+    <button class="btn" id="logoutBtn">Logout</button>
     <div class="container">
         <h1>Ask MyDuolingo!</h1>
 
@@ -17,14 +17,14 @@
             <!-- <p>To translate, enter as <br>
                 "Translate to French: Hello world" <br>
                 without double quotes.</p> -->
-                <p>MyDuolingo Translator</p>
-                <!-- driodown -->
+            <p>MyDuolingo Translator</p>
+            <!-- driodown -->
             <input id="translateLanguageInput" type="text" placeholder="ex: French">
             <input id="translateInput" type="text" placeholder="ex: Hello World!">
             <button class="btn" onclick="handleTranslate()">Translate</button>
             <div id="loadingSpinnerTranslate" style="display: none;">
                 <div class="spinner"></div>
-              </div>
+            </div>
             <div id="translationResult"></div>
         </section>
 
@@ -33,14 +33,14 @@
                 "Please answer to the following question. <br>
                 What is the storyline of The Three Little Pigs?" <br>
                 without double quotes.</p> -->
-                <p>MyDuolingo Teacher <br>
+            <p>MyDuolingo Teacher <br>
                 Explore your curiosity and expand your knowledge! <br>
                 Ask anything to MyDuolingo Teacher. </p>
             <input id="questionInput" type="text" placeholder="ex: Why the earth rotate itself?">
             <button class="btn" onclick="handleQuestion()">Ask</button>
             <div id="loadingSpinnerTeacher" style="display: none;">
                 <div class="spinner"></div>
-              </div>
+            </div>
             <div id="questionResult"></div>
         </section>
 
@@ -55,6 +55,7 @@
     </div>
 
     <script src="../js/llm.js"></script>
+    <script type="module" src="../js/logout.js"></script>
 </body>
 
 </html>
