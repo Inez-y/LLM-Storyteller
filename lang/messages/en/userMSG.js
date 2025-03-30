@@ -12,4 +12,7 @@ export default {
     qFail: 'Question request failed',
     aErr: 'Error getting answer.',
     unk: 'Oops! I\'m not familiar with that language...',
+    regisOK: 'Registration successful!',
+    regisFail: 'Registration failed. Please try again.',
+    regisErr: 'An error occurred. Please try again.',
 };

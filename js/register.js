@@ -1,3 +1,5 @@
+import messages from "../lang/messages/en/userMSG.js"; 
+
 document.getElementById('registerForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
   
@@ -19,13 +21,13 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       // Check the response status and update the UI accordingly
       if (response.ok) {
         const result = await response.json();
-        document.getElementById('message').textContent = 'Registration successful!';
+        document.getElementById('message').textContent = messages.regisOK;
         // You can redirect the user or perform other actions here
       } else {
-        document.getElementById('message').textContent = 'Registration failed. Please try again.';
+        document.getElementById('message').textContent = messages.regisFail;
       }
     } catch (error) {
-      document.getElementById('message').textContent = 'An error occurred. Please try again.';
+      document.getElementById('message').textContent = messages.regisErr;
       console.error('Error during registration:', error);
     }
   });
