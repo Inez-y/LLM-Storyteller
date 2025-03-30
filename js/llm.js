@@ -27,9 +27,11 @@ const handleTranslate = async () => {
         }
 
         const result = await response.json();
-        //console.log('result:', result);
+        console.log(result);
+
         const cleanedText = cleanText(result.translatedText);
-        //console.log('cleanedText:', cleanedText);
+        
+        console.log('cleanedText:', cleanedText);
 
         document.getElementById("translationResult").textContent = 'Translated Text: ' + cleanedText;
 
@@ -62,9 +64,9 @@ const handleQuestion = async () => {
         }
 
         const result = await response.json();
-        //console.log('result:', result);
+        console.log(result);
         const cleanedText = cleanText(result.translatedText);
-        // console.log('cleanedTExt:', cleanedText);
+        console.log('cleanedTExt:', cleanedText);
 
         document.getElementById("questionResult").textContent = 'Answer: ' + cleanedText;
 
@@ -79,10 +81,10 @@ const handleQuestion = async () => {
     }
 };
 
-// Parse the outcome from the LLM server
+// Function to clean and parse response from LLM server
 const cleanText = (text) => {
     if (text.includes('</unk>')) {
-        return 'Oops! I\'m not familiar with that language...'
+        return 'Oops! I\'m not familiar with that language...';
     }
     return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
