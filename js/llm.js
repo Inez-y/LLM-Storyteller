@@ -2,6 +2,7 @@
 let totalApiCalls = 0;
 let successfulRequests = 0;
 let failedRequests = 0;
+let hasShownWarning = false;
 
 const updateApiStats = () => {
     document.getElementById("totalApiCalls").textContent = totalApiCalls;
@@ -86,4 +87,15 @@ const cleanText = (text) => {
     if (text.includes('<unk>' || '</unk>')) {
         return 'Oops! I\'m not familiar with that language...';
     } else return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
+};
+
+// Function to track 20 API calls
+function updateApiStats() {
+    const totalApiCalls = successfulRequests + failedRequests;
+
+    // Show warning if total calls reach 20
+    if (totalApiCalls === 20 && !hasShownWarning) {
+        alert("You've reached free 20 API calls. Feel free to continue, but just a heads-up!");
+        hasShownWarning = true;
+    }
 };
