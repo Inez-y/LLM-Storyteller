@@ -52,6 +52,7 @@ const handleTranslate = async () => {
 
         successfulRequests++;
         updateApiStats();
+        await updateServerUsage(true);
     } catch (error) {
         console.error('Error:', error);
         // Hide spinner and show result
@@ -60,6 +61,7 @@ const handleTranslate = async () => {
 
         failedRequests++;
         updateApiStats();
+        await updateServerUsage(false);
     }
 };
 
@@ -93,6 +95,7 @@ const handleQuestion = async () => {
 
         successfulRequests++;
         updateApiStats();
+        await updateServerUsage(true);
     } catch (error) {
         console.error('Error:', error);
 
@@ -102,6 +105,7 @@ const handleQuestion = async () => {
 
         failedRequests++;
         updateApiStats();
+        await updateServerUsage(false);
     }
 };
 
@@ -112,3 +116,15 @@ const cleanText = (text) => {
     } else return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
 
+// Update API usage to the server
+const updateServerUsage = async (isSuccess) => {
+    try {
+        await fetch('https://storyteller-server-yrha7.ondigitalocean.app/update-user-usage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, isSuccess })
+        });
+    } catch (error) {
+        console.error('Error updating server usage:', error);
+    }
+};
