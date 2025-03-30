@@ -30,7 +30,7 @@ const handleTranslate = async () => {
 
     try {
         // Activate loading spinner after click the submit button
-        document.getElementById("loadingSpinner").style.display = 'block';
+        document.getElementById("loadingSpinnerTranslate").style.display = 'block';
         document.getElementById("translationResult").textContent = '';
 
         const response = await fetch(url, { method: 'GET' });
@@ -47,7 +47,7 @@ const handleTranslate = async () => {
         console.log('cleanedText:', cleanedText);
 
         // Hide spinner and show result
-        document.getElementById("loadingSpinner").style.display = 'none';
+        document.getElementById("loadingSpinnerTranslate").style.display = 'none';
         document.getElementById("translationResult").textContent = 'Translated Text: ' + cleanedText;
 
         successfulRequests++;
@@ -55,7 +55,7 @@ const handleTranslate = async () => {
     } catch (error) {
         console.error('Error:', error);
         // Hide spinner and show result
-        document.getElementById("loadingSpinner").style.display = 'none';
+        document.getElementById("loadingSpinnerTranslate").style.display = 'none';
         document.getElementById("translationResult").textContent = 'Error during translation.';
 
         failedRequests++;
@@ -72,7 +72,7 @@ const handleQuestion = async () => {
     //console.log(input, prompt)
     try {
         // Activate loading spinner after click the submit button
-        document.getElementById("loadingSpinner").style.display = 'block';
+        document.getElementById("loadingSpinnerTeacher").style.display = 'block';
         document.getElementById("translationResult").textContent = '';
 
 
@@ -88,7 +88,7 @@ const handleQuestion = async () => {
         //console.log('cleanedTExt:', cleanedText);
 
         // Hide spinner and show result
-        document.getElementById("loadingSpinner").style.display = 'none';
+        document.getElementById("loadingSpinnerTeacher").style.display = 'none';
         document.getElementById("questionResult").textContent = 'Answer: ' + cleanedText;
 
         successfulRequests++;
@@ -97,7 +97,7 @@ const handleQuestion = async () => {
         console.error('Error:', error);
 
         // Hide spinner and show result
-        document.getElementById("loadingSpinner").style.display = 'none';
+        document.getElementById("loadingSpinnerTeacher").style.display = 'none';
         document.getElementById("questionResult").textContent = 'Error getting answer.';
 
         failedRequests++;
