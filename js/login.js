@@ -1,3 +1,5 @@
+import messages from "../lang/messages/en/userMSG.js"; 
+
 document.getElementById('loginForm').addEventListener('submit', async function (event) {
   event.preventDefault(); // Prevent the default form submission
 
@@ -8,12 +10,9 @@ document.getElementById('loginForm').addEventListener('submit', async function (
   const data = { username, password };
 
   if (!emailPattern.test(username)) {
-    document.getElementById('message').innerHTML = "Please enter a valid email address.";
+    document.getElementById('message').innerHTML = messages.invalidEmail;
     document.getElementById('message').style.color = 'red';
     return;
-  } else {
-    document.getElementById('message').innerHTML = "Logging in...";
-    document.getElementById('message').style.color = 'green';
   }
 
   try {
@@ -29,7 +28,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     // Check if the request was successful
     if (response.ok) {
       const result = await response.json();
-      document.getElementById('message').textContent = 'Login successful!';
+      document.getElementById('message').textContent = messages.loginOK;
 
 
       // Check if the user is an admin
@@ -41,11 +40,11 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         window.location.href = './t2t.html';
       }
     } else {
-      document.getElementById('message').textContent = 'Login failed. Please try again.';
+      document.getElementById('message').textContent = messages.loginFail;
       document.getElementById('message').style.color = 'red';
     }
   } catch (error) {
-    document.getElementById('message').textContent = 'An error occurred. Please try again.';
+    document.getElementById('message').textContent = messages.loginErr;
     document.getElementById('message').style.color = 'red';
     console.error('Error during login:', error);
   }

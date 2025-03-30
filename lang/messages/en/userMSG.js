@@ -1,4 +1,4 @@
-window.messages = {
+export default {
     invalidInput: "Please enter a valid input",
     invalidEmail: "Please enter a valid email address.",
     loginOK: 'Login successful!',
@@ -6,6 +6,3 @@ window.messages = {
     loginErr: 'An error occurred. Please try again.'
 
 };
-
-// Export the messages object for use in other files
-export default messages;
