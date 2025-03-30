@@ -1,4 +1,5 @@
-// API 호출 통계 변수
+import messages from '../lang/messages/en/userMSG.js';
+
 let totalApiCalls = 0;
 let successfulRequests = 0;
 let failedRequests = 0;
@@ -7,14 +8,14 @@ let hasShownWarning = false;
 // Function to update api stats and count
 const updateApiStats = () => {
     totalApiCalls = successfulRequests + failedRequests;
-    
+
     document.getElementById("totalApiCalls").textContent = totalApiCalls;
     document.getElementById("successfulRequests").textContent = successfulRequests;
     document.getElementById("failedRequests").textContent = failedRequests;
 
     // Show warning if total calls reach 20
     if (totalApiCalls === 20 && !hasShownWarning) {
-        alert("You've reached free 20 API calls. Feel free to continue, but just a heads-up!");
+        alert(messages.over20Calls);
         hasShownWarning = true;
     }
 };
@@ -25,7 +26,7 @@ const handleTranslate = async () => {
     const input = document.getElementById("translateInput").value;
     const prompt = `Translate to ${targetLang}: ${input}`;
     console.log(targetLang, input, prompt);
-    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++; 
+    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; totalApiCalls++;
     updateApiStats();
 
     try {
@@ -36,14 +37,14 @@ const handleTranslate = async () => {
         const response = await fetch(url, { method: 'GET' });
 
         if (!response.ok) {
-            throw new Error('Translation failed');
+            throw new Error(messages.trFail);
         }
 
         const result = await response.json();
         console.log(result);
 
         const cleanedText = cleanText(result.translatedText);
-        
+
         console.log('cleanedText:', cleanedText);
 
         // Hide spinner and show result
@@ -56,7 +57,7 @@ const handleTranslate = async () => {
         console.error('Error:', error);
         // Hide spinner and show result
         document.getElementById("loadingSpinnerTranslate").style.display = 'none';
-        document.getElementById("translationResult").textContent = 'Error during translation.';
+        document.getElementById("translationResult").textContent = messages.trErr;
 
         failedRequests++;
         updateApiStats();
@@ -67,7 +68,7 @@ const handleTranslate = async () => {
 const handleQuestion = async () => {
     const input = document.getElementById("questionInput").value;
     const prompt = `Please answer to the following question. ${input}`;
-    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`;    totalApiCalls++;
+    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; totalApiCalls++;
     updateApiStats();
     //console.log(input, prompt)
     try {
@@ -79,7 +80,7 @@ const handleQuestion = async () => {
         const response = await fetch(url, { method: 'GET' });
 
         if (!response.ok) {
-            throw new Error('Question request failed');
+            throw new Error(messages.qFail);
         }
 
         const result = await response.json();
@@ -98,7 +99,7 @@ const handleQuestion = async () => {
 
         // Hide spinner and show result
         document.getElementById("loadingSpinnerTeacher").style.display = 'none';
-        document.getElementById("questionResult").textContent = 'Error getting answer.';
+        document.getElementById("questionResult").textContent = messages.aErr;
 
         failedRequests++;
         updateApiStats();
@@ -108,7 +109,7 @@ const handleQuestion = async () => {
 // Function to clean and parse response from LLM server
 const cleanText = (text) => {
     if (text.includes('<unk>' || '</unk>')) {
-        return 'Oops! I\'m not familiar with that language...';
+        return messages.unk
     } else return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
 

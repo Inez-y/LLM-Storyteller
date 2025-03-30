@@ -3,6 +3,13 @@ export default {
     invalidEmail: "Please enter a valid email address.",
     loginOK: 'Login successful!',
     loginFail: 'Login failed. Please try again.',
-    loginErr: 'An error occurred. Please try again.'
-
+    loginErr: 'An error occurred. Please try again.',
+    delConfirm: 'Are you sure you want to delete this user?',
+    delFail: 'Failed to delete user',
+    over20Calls: "You've reached free 20 API calls. Feel free to continue, but just a heads-up!",
+    trFail: 'Translation failed',
+    trErr: 'Error during translation.',
+    qFail: 'Question request failed',
+    aErr: 'Error getting answer.',
+    unk: 'Oops! I\'m not familiar with that language...',
 };

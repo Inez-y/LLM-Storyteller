@@ -1,3 +1,5 @@
+import messages from "../lang/messages/en/userMSG.js"; 
+
 document.addEventListener('DOMContentLoaded', () => {
   // Define the base URL using an environment variable.
   // When using a bundler, ensure that process.env.API_BASE_URL is replaced with the actual value.
@@ -113,14 +115,14 @@ async function updateUser(userId, field, newValue, originalValue, td) {
 
   // Delete a user record via API using the environment variable for the URL
   async function deleteUser(userId, rowElement) {
-    if (!confirm('Are you sure you want to delete this user?')) return;
+    if (!confirm(messages.delConfirm)) return;
     try {
       const response = await fetch(`${API_BASE_URL}/delete-user`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: userId })
       });
-      if (!response.ok) throw new Error('Failed to delete user');
+      if (!response.ok) throw new Error(messages.delFail);
       rowElement.remove();
       console.log(`User ${userId} deleted successfully`);
     } catch (error) {
