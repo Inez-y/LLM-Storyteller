@@ -25,7 +25,7 @@
       </div>
     </header>
     <div class="dashboard-cards">
-      <div class="card">
+      <!-- <div class="card">
         <h3>Total Users</h3>
         <p>150</p>
       </div>
@@ -36,7 +36,7 @@
       <div class="card">
         <h3>New Signups</h3>
         <p>12</p>
-      </div>
+      </div> -->
     </div>
     <div class="data-table" id="usersTable">
       <h2>Latest Users & Usage</h2>
@@ -55,6 +55,41 @@
         </tbody>
       </table>
     </div>
+
+    <div class="data-table" id="endpointStatsTable">
+      <h2>Endpoint Stats</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Usage Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS data -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="data-table" id="userStatsTable">
+      <h2>User API Usage Breakdown</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Total Calls</th>
+            <th>Successful</th>
+            <th>Failed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS data -->
+        </tbody>
+      </table>
+    </div>
+    
   </div>
   <script type="module" src="../js/dashboard.js"></script>
   <script type="module" src="../js/logout.js"></script>
