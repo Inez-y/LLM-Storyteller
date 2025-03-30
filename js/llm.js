@@ -83,8 +83,7 @@ const handleQuestion = async () => {
 
 // Function to clean and parse response from LLM server
 const cleanText = (text) => {
-    if (text.includes('</unk>')) {
+    if (text.includes('<unk>' || '</unk>')) {
         return 'Oops! I\'m not familiar with that language...';
-    }
-    return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
+    } else return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
