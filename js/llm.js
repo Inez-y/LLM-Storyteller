@@ -122,8 +122,9 @@ const updateServerUsage = async (isSuccess) => {
     try {
         await fetch('https://storyteller-server-yrha7.ondigitalocean.app/update-user-usage', {
             method: 'POST',
+            credentials: 'include', // server reads the user from the cookie automatically. for JWT
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, isSuccess })
+            body: JSON.stringify({ isSuccess })
         });
     } catch (error) {
         console.error('Error updating server usage:', error);
