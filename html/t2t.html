@@ -22,6 +22,9 @@
             <input id="translateLanguageInput" type="text" placeholder="ex: French">
             <input id="translateInput" type="text" placeholder="ex: Hello World!">
             <button class="btn" onclick="handleTranslate()">Translate</button>
+            <div id="loadingSpinner" style="display: none;">
+                <div class="spinner"></div>
+              </div>
             <div id="translationResult"></div>
         </section>
 
@@ -35,6 +38,9 @@
                 Ask anything to MyDuolingo Teacher. </p>
             <input id="questionInput" type="text" placeholder="ex: Why the earth rotate itself?">
             <button class="btn" onclick="handleQuestion()">Ask</button>
+            <div id="loadingSpinner" style="display: none;">
+                <div class="spinner"></div>
+              </div>
             <div id="questionResult"></div>
         </section>
 

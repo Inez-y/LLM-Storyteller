@@ -4,6 +4,7 @@ let successfulRequests = 0;
 let failedRequests = 0;
 let hasShownWarning = false;
 
+// Function to update api stats and count
 const updateApiStats = () => {
     document.getElementById("totalApiCalls").textContent = totalApiCalls;
     document.getElementById("successfulRequests").textContent = successfulRequests;
@@ -28,7 +29,10 @@ const handleTranslate = async () => {
     updateApiStats();
 
     try {
-        document.getElementById("translationResult").textContent = 'Loading...';
+        // Activate loading spinner after click the submit button
+        document.getElementById("loadingSpinner").style.display = 'block';
+        document.getElementById("translationResult").textContent = '';
+
         const response = await fetch(url, { method: 'GET' });
 
         if (!response.ok) {
@@ -42,12 +46,16 @@ const handleTranslate = async () => {
         
         console.log('cleanedText:', cleanedText);
 
+        // Hide spinner and show result
+        document.getElementById("loadingSpinner").style.display = 'none';
         document.getElementById("translationResult").textContent = 'Translated Text: ' + cleanedText;
 
         successfulRequests++;
         updateApiStats();
     } catch (error) {
         console.error('Error:', error);
+        // Hide spinner and show result
+        document.getElementById("loadingSpinner").style.display = 'none';
         document.getElementById("translationResult").textContent = 'Error during translation.';
 
         failedRequests++;
@@ -63,8 +71,10 @@ const handleQuestion = async () => {
     updateApiStats();
     //console.log(input, prompt)
     try {
-        // Loading message for user
-        document.getElementById("questionResult").textContent = 'Loading...';
+        // Activate loading spinner after click the submit button
+        document.getElementById("loadingSpinner").style.display = 'block';
+        document.getElementById("translationResult").textContent = '';
+
 
         const response = await fetch(url, { method: 'GET' });
 
@@ -73,16 +83,21 @@ const handleQuestion = async () => {
         }
 
         const result = await response.json();
-        console.log(result);
+        //console.log(result);
         const cleanedText = cleanText(result.translatedText);
-        console.log('cleanedTExt:', cleanedText);
+        //console.log('cleanedTExt:', cleanedText);
 
+        // Hide spinner and show result
+        document.getElementById("loadingSpinner").style.display = 'none';
         document.getElementById("questionResult").textContent = 'Answer: ' + cleanedText;
 
         successfulRequests++;
         updateApiStats();
     } catch (error) {
         console.error('Error:', error);
+
+        // Hide spinner and show result
+        document.getElementById("loadingSpinner").style.display = 'none';
         document.getElementById("questionResult").textContent = 'Error getting answer.';
 
         failedRequests++;
