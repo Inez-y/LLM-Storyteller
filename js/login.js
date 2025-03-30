@@ -1,5 +1,5 @@
 // import { messages } from "../lang/messages/en/userMSG.js";
-// import { validateEmail } from './validation.js';
+import { validateEmail } from './validation.js';
 
 document.getElementById('loginForm').addEventListener('submit', async function (event) {
   event.preventDefault(); // Prevent the default form submission
