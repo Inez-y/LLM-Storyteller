@@ -1,4 +1,5 @@
-import messages from "../lang/messages/en/userMSG.js";
+import * as messages from "../lang/messages/en/userMSG.js";
+
 
 document.getElementById('logoutBtn').addEventListener('click', async function () {
     try {
