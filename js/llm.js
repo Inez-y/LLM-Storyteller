@@ -8,6 +8,14 @@ const updateApiStats = () => {
     document.getElementById("totalApiCalls").textContent = totalApiCalls;
     document.getElementById("successfulRequests").textContent = successfulRequests;
     document.getElementById("failedRequests").textContent = failedRequests;
+    
+    const totalApiCalls = successfulRequests + failedRequests;
+
+    // Show warning if total calls reach 20
+    if (totalApiCalls === 20 && !hasShownWarning) {
+        alert("You've reached free 20 API calls. Feel free to continue, but just a heads-up!");
+        hasShownWarning = true;
+    }
 };
 
 // [Translation]: The first text box
@@ -89,13 +97,3 @@ const cleanText = (text) => {
     } else return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
 
-// Function to track 20 API calls
-function updateApiStats() {
-    const totalApiCalls = successfulRequests + failedRequests;
-
-    // Show warning if total calls reach 20
-    if (totalApiCalls === 20 && !hasShownWarning) {
-        alert("You've reached free 20 API calls. Feel free to continue, but just a heads-up!");
-        hasShownWarning = true;
-    }
-};
