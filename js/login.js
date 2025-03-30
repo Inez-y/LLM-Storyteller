@@ -1,4 +1,4 @@
-// import { messages } from "../lang/messages/en/userMSG.js";
+import messages from "../lang/messages/en/userMSG.js"; 
 import { validateEmail } from './validation.js';
 
 document.getElementById('loginForm').addEventListener('submit', async function (event) {
