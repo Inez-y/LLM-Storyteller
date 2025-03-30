@@ -6,11 +6,11 @@ let hasShownWarning = false;
 
 // Function to update api stats and count
 const updateApiStats = () => {
+    totalApiCalls = successfulRequests + failedRequests;
+    
     document.getElementById("totalApiCalls").textContent = totalApiCalls;
     document.getElementById("successfulRequests").textContent = successfulRequests;
     document.getElementById("failedRequests").textContent = failedRequests;
-    
-    totalApiCalls = successfulRequests + failedRequests;
 
     // Show warning if total calls reach 20
     if (totalApiCalls === 20 && !hasShownWarning) {
