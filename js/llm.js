@@ -10,7 +10,7 @@ const updateApiStats = () => {
     document.getElementById("successfulRequests").textContent = successfulRequests;
     document.getElementById("failedRequests").textContent = failedRequests;
     
-    const totalApiCalls = successfulRequests + failedRequests;
+    totalApiCalls = successfulRequests + failedRequests;
 
     // Show warning if total calls reach 20
     if (totalApiCalls === 20 && !hasShownWarning) {
