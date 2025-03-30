@@ -1,19 +1,20 @@
-import messages from "../lang/messages/en/userMSG.js"; 
+import messages from "../lang/messages/en/userMSG.js";
+import { validateEmail } from './validation.js';
 
 document.getElementById('loginForm').addEventListener('submit', async function (event) {
   event.preventDefault(); // Prevent the default form submission
 
   // Collect the form data
   const username = document.getElementById('username').value;
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   const password = document.getElementById('password').value;
-  const data = { username, password };
 
-  if (!emailPattern.test(username)) {
+  if (!validateEmail(username)) {
     document.getElementById('message').innerHTML = messages.invalidEmail;
     document.getElementById('message').style.color = 'red';
     return;
   }
+
+  const data = { username, password };
 
   try {
     // Make an AJAX POST request to the login endpoint
