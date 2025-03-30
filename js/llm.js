@@ -1,4 +1,4 @@
-import messages from '../lang/messages/en/userMSG.js';
+// import messages from '../lang/messages/en/userMSG.js';
 
 let totalApiCalls = 0;
 let successfulRequests = 0;
