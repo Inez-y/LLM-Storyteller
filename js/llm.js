@@ -5,6 +5,19 @@ let successfulRequests = 0;
 let failedRequests = 0;
 let hasShownWarning = false;
 
+
+const userId = async () => {
+    try {
+        await fetch('https://storyteller-server-yrha7.ondigitalocean.app/me', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, successfulReqruests, failedRequests, totalApiCalls })
+        });
+    } catch (error) {
+        console.error('Error updating server usage:', error);
+    }
+}
+
 // Function to update api stats and count
 const updateApiStats = () => {
     totalApiCalls = successfulRequests + failedRequests;
@@ -53,7 +66,7 @@ const handleTranslate = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(true);
+        await updateServerUsage(userId, successfulReqruests, failedRequests, totalApiCallstrue);
     } catch (error) {
         console.error('Error:', error);
         // Hide spinner and show result
@@ -62,7 +75,7 @@ const handleTranslate = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(false);
+        await updateServerUsage(userId, successfulReqruests, failedRequests, totalApiCallsfalse);
     }
 };
 
@@ -72,7 +85,7 @@ const handleQuestion = async () => {
     const prompt = `Please answer to the following question. ${input}`;
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; totalApiCalls++;
     updateApiStats();
-    //console.log(input, prompt)
+
     try {
         // Activate loading spinner after click the submit button
         document.getElementById("loadingSpinnerTeacher").style.display = 'block';
@@ -96,7 +109,7 @@ const handleQuestion = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(true);
+        await updateServerUsage(userId, successfulReqruests, failedRequests, totalApiCallstrue);
     } catch (error) {
         console.error('Error:', error);
 
@@ -106,7 +119,7 @@ const handleQuestion = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(false);
+        await updateServerUsage(userId, successfulReqruests, failedRequests, totalApiCallsfalse);
     }
 };
 
@@ -117,14 +130,13 @@ const cleanText = (text) => {
     } else return text.replace(/<pad>/g, '').replace(/<\/s>/g, '').trim();
 };
 
-// Update API usage to the server
-const updateServerUsage = async (isSuccess) => {
+// Update API usage to the server - how to get user id
+const updateServerUsage = async (userId, successfulReqruests, failedRequests, totalApiCalls) => {
     try {
         await fetch('https://storyteller-server-yrha7.ondigitalocean.app/update-user-usage', {
             method: 'POST',
-            credentials: 'include', // server reads the user from the cookie automatically. for JWT
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ isSuccess })
+            body: JSON.stringify({ userId, successfulReqruests, failedRequests, totalApiCalls })
         });
     } catch (error) {
         console.error('Error updating server usage:', error);
