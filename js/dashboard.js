@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await fetch(`${API_BASE_URL}/get-users`);
       const response2 = await fetch(`${API_BASE_URL}/get-user-usage`);
-      if (!response.ok) throw new Error('Failed to fetch users');       
+      if (!response.ok || !response2.ok) throw new Error('Failed to fetch user usage stats');   
       const users = await response.json();
       const userUsage = await response2.json();
       console.log(users);
