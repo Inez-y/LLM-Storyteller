@@ -66,7 +66,7 @@ const handleTranslate = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(userId, successfulRequests, failedRequests, totalApiCallstrue);
+        await updateServerUsage(userId, successfulRequests, failedRequests, totalApiCalls);
     } catch (error) {
         console.error('Error:', error);
         // Hide spinner and show result
@@ -75,7 +75,7 @@ const handleTranslate = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(userId, successfulRequests, failedRequests, totalApiCallsfalse);
+        await updateServerUsage(userId, successfulRequests, failedRequests, totalApiCalls);
     }
 };
 
