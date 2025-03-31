@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       users.forEach(user => {
         // Find the usage data for the current user.
-        const usage = userUsage.find(u => u.userId === user.id);
+        const usage = userUsage.find(u => u.user_id === user.id);
         // Pass both user and usage to the row-rendering function.
         addUserRow(user, usage);
       });
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tableBody.innerHTML = '';
   
       users.forEach(user => {
-        const usage = usageStats.find(stat => stat.userId === user.id);
+        const usage = usageStats.find(stat => stat.user_id === user.id);
         const tr = document.createElement('tr');
   
         const idTd = document.createElement('td');
