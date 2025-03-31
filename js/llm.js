@@ -4,9 +4,6 @@ let totalApiCalls = 0;
 let successfulRequests = 0;
 let failedRequests = 0;
 let hasShownWarning = false;
-document.getElementById("translateBtn").addEventListener("click", handleTranslate);
-document.getElementById("askBtn").addEventListener("click", handleQuestion);
-
 
 // Function to update api stats and count
 const updateApiStats = () => {
@@ -133,3 +130,9 @@ const updateServerUsage = async (isSuccess) => {
         console.error('Error updating server usage:', error);
     }
 };
+
+// Attach event listeners once DOM is ready
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("translateBtn").addEventListener("click", handleTranslate);
+    document.getElementById("askBtn").addEventListener("click", handleQuestion);
+});
