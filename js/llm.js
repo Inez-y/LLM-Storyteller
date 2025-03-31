@@ -1,3 +1,5 @@
+// This code was completed with the help of ChatGPT
+
 import * as messages from "../lang/messages/en/userMSG.js";
 
 let hasShownWarning = false;
