@@ -1,7 +1,9 @@
 import * as messages from "../lang/messages/en/userMSG.js";
 
 let hasShownWarning = false;
-
+let totalApiCalls = 0;
+let successfulRequests = 0;
+let failedRequests = 0;
 
 // Function to update api stats and count
 const updateApiStats = async () => {
@@ -47,7 +49,7 @@ const handleTranslate = async () => {
     const input = document.getElementById("translateInput").value;
     const prompt = `Translate to ${targetLang}: ${input}`;
     console.log(targetLang, input, prompt);
-    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; totalApiCalls++;
+    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; 
     updateApiStats();
 
     try {
@@ -74,7 +76,7 @@ const handleTranslate = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
+        await updateServerUsage(successfulRequests, failedRequests, successfulRequests + failedRequests);
     } catch (error) {
         console.error('Error:', error);
         // Hide spinner and show result
@@ -83,7 +85,7 @@ const handleTranslate = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
+        await updateServerUsage(successfulRequests, failedRequests, successfulRequests + failedRequests);
     }
 };
 
@@ -92,7 +94,6 @@ const handleQuestion = async () => {
     const input = document.getElementById("questionInput").value;
     const prompt = `Please answer to the following question. ${input}`;
     const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; 
-    totalApiCalls++;
     updateApiStats();
 
     try {
@@ -118,7 +119,7 @@ const handleQuestion = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
+        await updateServerUsage(successfulRequests, failedRequests, successfulRequests + failedRequests);
     } catch (error) {
         console.error('Error:', error);
 
@@ -128,7 +129,7 @@ const handleQuestion = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
+        await updateServerUsage(successfulRequests, failedRequests, successfulRequests + failedRequests);
     }
 };
 
