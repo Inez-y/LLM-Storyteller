@@ -136,6 +136,7 @@ const updateServerUsage = async ( successful_calls, failed_calls, total_calls) =
         await fetch('https://storyteller-server-yrha7.ondigitalocean.app/update-user-usage', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify({ successful_calls, failed_calls, total_calls })
         });
     } catch (error) {
