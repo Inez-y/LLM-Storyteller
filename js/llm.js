@@ -5,21 +5,45 @@ let successfulRequests = 0;
 let failedRequests = 0;
 let hasShownWarning = false;
 
+
 // Function to update api stats and count
-const updateApiStats = () => {
-    totalApiCalls = successfulRequests + failedRequests;
-
-    document.getElementById("totalApiCalls").textContent = totalApiCalls;
-    document.getElementById("successfulRequests").textContent = successfulRequests;
-    document.getElementById("failedRequests").textContent = failedRequests;
-
-    // Show warning if total calls reach 20
-    if (totalApiCalls === 20 && !hasShownWarning) {
+const updateApiStats = async () => {
+    try {
+      const response = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/get-user-usage', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch usage data');
+      }
+      
+      const data = await response.json();
+      // Assuming the endpoint returns an array with a single usage record:
+      const usage = Array.isArray(data) && data.length > 0 
+        ? data[0] 
+        : { total_calls: 0, successful_calls: 0, failed_calls: 0 };
+  
+      // Update local counters based on fetched usage stats
+      totalApiCalls = usage.total_calls;
+      successfulRequests = usage.successful_calls;
+      failedRequests = usage.failed_calls;
+      
+      document.getElementById("totalApiCalls").textContent = totalApiCalls;
+      document.getElementById("successfulRequests").textContent = successfulRequests;
+      document.getElementById("failedRequests").textContent = failedRequests;
+      
+      // Show warning if total calls reach or exceed 20
+      if (totalApiCalls >= 20 && !hasShownWarning) {
         alert(messages.over20Calls);
         hasShownWarning = true;
+      }
+    } catch (error) {
+      console.error('Error updating API stats:', error);
     }
-};
-
+  };
+  
 // [Translation]: The first text box
 const handleTranslate = async () => {
     const targetLang = document.getElementById("translateLanguageInput").value;
@@ -133,6 +157,8 @@ const updateServerUsage = async ( successful_calls, failed_calls, total_calls) =
 
 // Attach event listeners once DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
+    updateApiStats();
     document.getElementById("translateBtn").addEventListener("click", handleTranslate);
     document.getElementById("askBtn").addEventListener("click", handleQuestion);
-});
+  });
+  
