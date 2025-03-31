@@ -10,7 +10,9 @@ document.getElementById('logoutBtn').addEventListener('click', async function ()
         });
 
         if (response.ok) {
-            window.location.href = 'https://storyteller-us7ph.ondigitalocean.app/'; // redirection if needed
+            const data = await response.json();
+            console.log(data.messages);
+            window.location.href = 'https://storyteller-us7ph.ondigitalocean.app/'; // redirection to landing page
         } else {
             document.getElementById('message').textContent = messages.logoutFail;
             document.getElementById('message').style.color = 'red';
