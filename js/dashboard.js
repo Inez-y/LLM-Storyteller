@@ -72,51 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error fetching user usage breakdown:', error);
     }
   }
-  
-  //Fetch user usage stats
-  async function fetchUserUsageStats() {
-    try {
-      const usersRes = await fetch(`${API_BASE_URL}/get-users`);
-      const usageRes = await fetch(`${API_BASE_URL}/get-user-usage`);
-      if (!usersRes.ok || !usageRes.ok) throw new Error('Failed to fetch user usage stats');
-      
-      const users = await usersRes.json();
-      const usageStats = await usageRes.json();
-  
-      const tableBody = document.querySelector('#userStatsTable tbody');
-      tableBody.innerHTML = '';
-  
-      users.forEach(user => {
-        const usage = usageStats.find(stat => stat.userId === user.id);
-        const tr = document.createElement('tr');
-  
-        const idTd = document.createElement('td');
-        idTd.textContent = user.id;
-        tr.appendChild(idTd);
-  
-        const nameTd = document.createElement('td');
-        nameTd.textContent = user.username;
-        tr.appendChild(nameTd);
-  
-        const totalTd = document.createElement('td');
-        totalTd.textContent = usage ? usage.total_calls : '0';
-        tr.appendChild(totalTd);
-  
-        const successTd = document.createElement('td');
-        successTd.textContent = usage ? usage.successful_calls : '0';
-        tr.appendChild(successTd);
-  
-        const failedTd = document.createElement('td');
-        failedTd.textContent = usage ? usage.failed_calls : '0';
-        tr.appendChild(failedTd);
-  
-        tableBody.appendChild(tr);
-      });
-    } catch (error) {
-      console.error('Error fetching user usage breakdown:', error);
-    }
-  }
-  
+   
   // Fetch endpoint stats - need to update server tho
   async function fetchEndpointStats() {
     try {
@@ -174,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tr.appendChild(tdPassword);
     
     const tdUsage = document.createElement('td');
-    tdUsage.textContent = userUsage ? userUsage.details : 'No Usage Data';
+    tdUsage.textContent = userUsage ? userUsage.total_calls : 'No Usage Data';
     tr.appendChild(tdUsage);
 
     // Actions cell with a Delete button
