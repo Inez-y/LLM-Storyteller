@@ -5,19 +5,6 @@ let successfulRequests = 0;
 let failedRequests = 0;
 let hasShownWarning = false;
 
-
-const userId = async () => {
-    try {
-        await fetch('https://storyteller-server-yrha7.ondigitalocean.app/me', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, successfulRequests, failedRequests, totalApiCalls })
-        });
-    } catch (error) {
-        console.error('Error updating server usage:', error);
-    }
-}
-
 // Function to update api stats and count
 const updateApiStats = () => {
     totalApiCalls = successfulRequests + failedRequests;
