@@ -11,7 +11,7 @@ const userId = async () => {
         await fetch('https://storyteller-server-yrha7.ondigitalocean.app/me', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, successfulReqruests, failedRequests, totalApiCalls })
+            body: JSON.stringify({ userId, successfulRequests, failedRequests, totalApiCalls })
         });
     } catch (error) {
         console.error('Error updating server usage:', error);
@@ -66,7 +66,7 @@ const handleTranslate = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(userId, successfulRequests, failedRequests, totalApiCalls);
+        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
     } catch (error) {
         console.error('Error:', error);
         // Hide spinner and show result
@@ -75,7 +75,7 @@ const handleTranslate = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(userId, successfulRequests, failedRequests, totalApiCalls);
+        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
     }
 };
 
@@ -109,7 +109,7 @@ const handleQuestion = async () => {
 
         successfulRequests++;
         updateApiStats();
-        await updateServerUsage(userId, successfulReqruests, failedRequests, totalApiCallstrue);
+        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
     } catch (error) {
         console.error('Error:', error);
 
@@ -119,7 +119,7 @@ const handleQuestion = async () => {
 
         failedRequests++;
         updateApiStats();
-        await updateServerUsage(userId, successfulReqruests, failedRequests, totalApiCallsfalse);
+        await updateServerUsage(successfulRequests, failedRequests, totalApiCalls);
     }
 };
 
@@ -131,12 +131,12 @@ const cleanText = (text) => {
 };
 
 // Update API usage to the server - how to get user id
-const updateServerUsage = async (userId, successfulReqruests, failedRequests, totalApiCalls) => {
+const updateServerUsage = async ( successful_calls, failed_calls, total_calls) => {
     try {
         await fetch('https://storyteller-server-yrha7.ondigitalocean.app/update-user-usage', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, successfulReqruests, failedRequests, totalApiCalls })
+            body: JSON.stringify({ successful_calls, failed_calls, total_calls })
         });
     } catch (error) {
         console.error('Error updating server usage:', error);
