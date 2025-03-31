@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const users = await response.json();
       const userUsage = await response2.json();
       console.log(users);
+      console.log(userUsage);
       tableBody.innerHTML = '';
       
       users.forEach(user => {
