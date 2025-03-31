@@ -1,8 +1,5 @@
 import * as messages from "../lang/messages/en/userMSG.js";
 
-let totalApiCalls = 0;
-let successfulRequests = 0;
-let failedRequests = 0;
 let hasShownWarning = false;
 
 
@@ -94,7 +91,8 @@ const handleTranslate = async () => {
 const handleQuestion = async () => {
     const input = document.getElementById("questionInput").value;
     const prompt = `Please answer to the following question. ${input}`;
-    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; totalApiCalls++;
+    const url = `https://storyteller-server-yrha7.ondigitalocean.app/t2t?prompt=${encodeURIComponent(prompt)}`; 
+    totalApiCalls++;
     updateApiStats();
 
     try {
