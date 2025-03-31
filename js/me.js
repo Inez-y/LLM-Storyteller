@@ -1,9 +1,17 @@
 import * as messages from "../lang/messages/en/userMSG.js";
 
-const fetchUser = async () => {
-    const res = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/me', {
-      credentials: 'include'
+// Correct GET request without a body and with credentials
+const getUserId = async () => {
+  try {
+    const response = await fetch('https://storyteller-server-yrha7.ondigitalocean.app/me', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'  // include cookies in the request
     });
-    const user = await res.json();
-    console.log('Logged in as:', user.username);
-  };
+    const data = await response.json();
+    console.log("User data:", data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+};
